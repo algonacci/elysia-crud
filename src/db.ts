@@ -35,4 +35,18 @@ export class ProductsDatabase {
             )
             .get(product.name, product.price, product.image) as Product;
     }
+
+    updateProduct(id: number, product: Product) {
+        return this.db.run(
+            `UPDATE products SET name='${product.name}', price='${product.price}', image='${product.image}'
+            WHERE id = ${id}
+            `
+        )
+    }
+
+    deleteProduct(id: number) {
+        return this.db.run(
+            `DELETE FROM products WHERE id = ${id}`
+        )
+    }
 }

@@ -21,6 +21,12 @@ export class ProductsDatabase {
         ).all()
     }
 
+    fetchProductByID(id: number) {
+        return this.db.query(
+            `SELECT * FROM PRODUCTS WHERE ID = ${id}`
+        ).all()
+    }
+
     createTable() {
         this.db.run("CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price NUM, image TEXT)");
     }
@@ -38,7 +44,7 @@ export class ProductsDatabase {
 
     updateProduct(id: number, product: Product) {
         return this.db.run(
-            `UPDATE products SET name='${product.name}', price='${product.price}', image='${product.image}'
+            `UPDATE products SET name='${product.name}', price='${product.price}'
             WHERE id = ${id}
             `
         )
